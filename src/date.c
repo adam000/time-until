@@ -20,7 +20,7 @@ int daysInMonth(int month, int year) {
    if (month == 2 && year%4 == 0) {
       return 29;
    }
-   
+
    switch (month) {
       case 1:
       case 3:
@@ -37,7 +37,7 @@ int daysInMonth(int month, int year) {
       case 11:
          return 30;
    }
-   
+
    // invalid
    return 0;
 }
@@ -52,13 +52,13 @@ Date DiffDates(Date start, Date end) {
          return InvalidDate;
       }
    }
-   
+
    Date diff = {
       .day = end.day - start.day,
       .month = end.month - start.month,
       .year = end.year - start.year
    };
-   
+
    if (diff.day <= 0) {
       diff.month--;
       int priorMonth = end.month - 1;
@@ -69,11 +69,11 @@ Date DiffDates(Date start, Date end) {
       }
       diff.day += daysInMonth(priorMonth, priorYear);
    }
-   
+
    if (diff.month < 0) {
       diff.year--;
       diff.month += 12;
    }
-   
+
    return diff;
 }
