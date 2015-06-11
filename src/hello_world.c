@@ -1,4 +1,5 @@
 #include <pebble.h>
+#include "date.h"
 
 Window *window;
 TextLayer *text_layer;
