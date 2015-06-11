@@ -16,6 +16,13 @@ Date CurrentDate() {
    return getTimeAsDate(time(NULL));
 }
 
+int daysInYear(int year) {
+   if (year%4 == 0) {
+      return 366;
+   }
+   return 365;
+}
+
 int daysInMonth(int month, int year) {
    if (month == 2 && year%4 == 0) {
       return 29;
@@ -40,6 +47,15 @@ int daysInMonth(int month, int year) {
 
    // invalid
    return 0;
+}
+
+int dayOfYear(Date date) {
+   int numDays = 0;
+   for (int i = 1; i < date.month; i++) {
+      numDays += daysInMonth(i, date.year);
+   }
+   numDays += date.day;
+   return numDays;
 }
 
 Date DiffDates(Date start, Date end) {
@@ -76,4 +92,18 @@ Date DiffDates(Date start, Date end) {
    }
 
    return diff;
+}
+
+int DiffDatesDays(Date start, Date end) {
+   int numDays = 0;
+
+   numDays -= dayOfYear(start);
+   
+   for (int year = start.year; year < end.year; year++) {
+      numDays += daysInYear(year);
+   }
+   
+   numDays += dayOfYear(end) + 1;
+
+   return numDays;
 }
