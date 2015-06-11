@@ -1,35 +1,47 @@
 #include <pebble.h>
 #include "date.h"
+#include "colors.h"
 
 Window *window;
-TextLayer *text_layer;
+TextLayer *layer_day;
+TextLayer *layer_month;
+TextLayer *layer_year;
 
 void handle_init(void) {
    // Create a window and text layer
    window = window_create();
-   text_layer = text_layer_create(GRect(0, 50, 144, 30));
+   layer_day = text_layer_create(GRect(9, 66, 28, 35));
+   layer_month = text_layer_create(GRect(43, 66, 28, 35));
+   layer_year = text_layer_create(GRect(76, 66, 58, 35));
 
-   // Set the text, font, and text alignment
-   text_layer_set_text(text_layer, "Hi, I'm a Pebble!");
-   text_layer_set_font(text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24));
-   text_layer_set_text_alignment(text_layer, GTextAlignmentCenter);
+   text_layer_set_text(layer_day, "06");
+   text_layer_set_font(layer_day, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
+   text_layer_set_text_alignment(layer_day, GTextAlignmentCenter);
+   text_layer_set_background_color(layer_day, C_BACKGROUND_SELECTED);
+   text_layer_set_text_color(layer_day, C_FOREGROUND_SELECTED);
+   layer_add_child(window_get_root_layer(window), text_layer_get_layer(layer_day));
 
-  text_layer_set_background_color(text_layer, COLOR_FALLBACK(GColorCyan, GColorBlack));
-   text_layer_set_text_color(text_layer, COLOR_FALLBACK(GColorBlueMoon, GColorWhite));
+   text_layer_set_text(layer_month, "10");
+   text_layer_set_font(layer_month, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
+   text_layer_set_text_alignment(layer_month, GTextAlignmentCenter);
+   text_layer_set_background_color(layer_month, C_BACKGROUND);
+   text_layer_set_text_color(layer_month, C_FOREGROUND);
+   layer_add_child(window_get_root_layer(window), text_layer_get_layer(layer_month));
 
-   // Add the text layer to the window
-   layer_add_child(window_get_root_layer(window), text_layer_get_layer(text_layer));
+   text_layer_set_text(layer_year, "2015");
+   text_layer_set_font(layer_year, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
+   text_layer_set_text_alignment(layer_year, GTextAlignmentCenter);
+   text_layer_set_background_color(layer_year, C_BACKGROUND);
+   text_layer_set_text_color(layer_year, C_FOREGROUND);
+   layer_add_child(window_get_root_layer(window), text_layer_get_layer(layer_year));
 
    // Push the window
    window_stack_push(window, true);
-
-   // App Logging!
-   APP_LOG(APP_LOG_LEVEL_DEBUG, "Just pushed a window!");
 }
 
 void handle_deinit(void) {
    // Destroy the text layer
-   text_layer_destroy(text_layer);
+   text_layer_destroy(layer_day);
 
    // Destroy the window
    window_destroy(window);
