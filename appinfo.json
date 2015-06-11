@@ -1,0 +1,23 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "adamh.zero@gmail.com",
+    "longName": "Time Until...",
+    "projectType": "native",
+    "resources": {
+        "media": []
+    },
+    "sdkVersion": "3",
+    "shortName": "Time Until...",
+    "targetPlatforms": [
+        "aplite",
+        "basalt"
+    ],
+    "uuid": "5879e0fb-0eb0-4d93-99d1-beaa06faf835",
+    "versionLabel": "0.1",
+    "watchapp": {
+        "watchface": false
+    }
+}
