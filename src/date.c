@@ -114,22 +114,22 @@ Date Today() {
 }
 
 char* Day(Date* date) {
-    size_t len = sizeof(char) * 2;
+    size_t len = sizeof(char) * 3;
     char* day = malloc(len);
     snprintf(day, len, "%02d", date->day);
     return day;
 }
 
 char* Month(Date* date) {
-    size_t len = sizeof(char) * 2;
+    size_t len = sizeof(char) * 3;
     char* month = malloc(len);
     snprintf(month, len, "%02d", date->month);
     return month;
 }
 
 char* Year(Date* date) {
-    size_t len = sizeof(char) * 2;
+    size_t len = sizeof(char) * 5;
     char* year = malloc(len);
-    snprintf(year, len, "%02d", date->year);
+    snprintf(year, len, "%04d", date->year);
     return year;
 }
