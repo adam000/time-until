@@ -38,6 +38,7 @@ int daysInMonth(int month, int year) {
       case 12:
          return 31;
       case 2:
+         return 28;
       case 4:
       case 6:
       case 9:
@@ -98,12 +99,16 @@ int DiffDatesDays(Date start, Date end) {
    int numDays = 0;
 
    numDays -= dayOfYear(start);
-   
+
    for (int year = start.year; year < end.year; year++) {
       numDays += daysInYear(year);
    }
-   
+
    numDays += dayOfYear(end) + 1;
 
    return numDays;
+}
+
+Date Today() {
+    return getTimeAsDate(time(NULL));
 }
