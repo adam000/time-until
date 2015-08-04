@@ -31,7 +31,7 @@ void updateWhichSelected() {
       text_layer_set_text_color(layer_year, C_FOREGROUND_SELECTED);
       break;
    }
-   
+
    size_t len = sizeof(char) * 32;
    char* str = malloc(len);
    snprintf(str, len, "Set selected level: %d", selected % 3);
@@ -67,7 +67,7 @@ void handle_init(void) {
    text_layer_set_text_color(layer_year, C_FOREGROUND);
    layer_add_child(window_get_root_layer(window), text_layer_get_layer(layer_year));
    updateWhichSelected();
-   
+
    window_set_click_config_provider(window, (ClickConfigProvider)config_provider);
 
    // Push the window
@@ -90,7 +90,7 @@ int main(void) {
 
 void mid_single_click_handler(ClickRecognizerRef recognizer, void* context) {
    selected++;
-   
+
    updateWhichSelected();
 }
 

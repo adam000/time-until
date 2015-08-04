@@ -112,3 +112,24 @@ int DiffDatesDays(Date start, Date end) {
 Date Today() {
     return getTimeAsDate(time(NULL));
 }
+
+char* Day(Date* date) {
+    size_t len = sizeof(char) * 2;
+    char* day = malloc(len);
+    snprintf(day, len, "%02d", date->day);
+    return day;
+}
+
+char* Month(Date* date) {
+    size_t len = sizeof(char) * 2;
+    char* month = malloc(len);
+    snprintf(month, len, "%02d", date->month);
+    return month;
+}
+
+char* Year(Date* date) {
+    size_t len = sizeof(char) * 2;
+    char* year = malloc(len);
+    snprintf(year, len, "%02d", date->year);
+    return year;
+}
