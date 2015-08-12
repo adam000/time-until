@@ -110,26 +110,70 @@ int DiffDatesDays(Date start, Date end) {
 }
 
 Date Today() {
-    return getTimeAsDate(time(NULL));
+   return getTimeAsDate(time(NULL));
 }
 
-char* Day(Date* date) {
-    size_t len = sizeof(char) * 3;
-    char* day = malloc(len);
-    snprintf(day, len, "%02d", date->day);
-    return day;
+char* Day(const Date* date) {
+   size_t len = sizeof(char) * 3;
+   char* day = malloc(len);
+   snprintf(day, len, "%02d", date->day);
+   return day;
 }
 
-char* Month(Date* date) {
-    size_t len = sizeof(char) * 3;
-    char* month = malloc(len);
-    snprintf(month, len, "%02d", date->month);
-    return month;
+char* Month(const Date* date) {
+   size_t len = sizeof(char) * 3;
+   char* month = malloc(len);
+   snprintf(month, len, "%02d", date->month);
+   return month;
 }
 
-char* Year(Date* date) {
-    size_t len = sizeof(char) * 5;
-    char* year = malloc(len);
-    snprintf(year, len, "%04d", date->year);
-    return year;
+char* Year(const Date* date) {
+   size_t len = sizeof(char) * 5;
+   char* year = malloc(len);
+   snprintf(year, len, "%04d", date->year + 1900);
+   return year;
 }
+
+void ceilDays(Date* date) {
+   int days = daysInMonth(date->month, date->year);
+   if (date->day > days) {
+      date->day = days;
+   }
+}
+
+void normalizeMonthLow(Date* date) {
+   while (date->month <= 0) {
+      date->year--;
+      date->month += 12;
+   }
+}
+
+void normalizeMonthHigh(Date* date) {
+   while (date->month > 12) {
+      date->month -= 12;
+      date->year++;
+   }
+   ceilDays(date);
+}
+
+void NormalizeMonth(Date* date) {
+   normalizeMonthLow(date);
+   normalizeMonthHigh(date);
+}
+
+void NormalizeDay(Date* date) {
+   while (date->day <= 0) {
+      date->month--;
+      normalizeMonthLow(date);
+      date->day += daysInMonth(date->month, date->year);
+   }
+
+   int days = daysInMonth(date->month, date->year);
+   if (date->day > days) {
+      date->day -= days;
+      date->month++;
+   }
+   normalizeMonthHigh(date);
+}
+
+/* vim: set sw=3: */
